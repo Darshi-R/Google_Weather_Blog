@@ -10,9 +10,9 @@ let descriptionElement=document.querySelector("#description");
 
 function temperature (response){
 // console.log(response.data.main.temp);
-degreeelement.innerHTML= Math.round(response.data.main.temp);
-humidelement.innerHTML= Math.round(response.data.main.humidity);
-airelement.innerHTML= Math.round(response.data.wind.speed);
-descriptionelement.innerHTML=(response.data.weather[0].description);
+degreeElement.innerHTML= Math.round(response.data.main.temp);
+humidElement.innerHTML= Math.round(response.data.main.humidity);
+airElement.innerHTML= Math.round(response.data.wind.speed);
+descriptionElement.innerHTML=(response.data.weather[0].description);
 }
 axios.get(apiUrl).then(temperature);
