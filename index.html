@@ -9,6 +9,7 @@
       integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
       crossorigin="anonymous"
     />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="src/styles.css" />
     <title>Google_Weather_Blog</title>
   </head>
@@ -19,8 +20,8 @@
           <div>
             <h1>New York, USA</h1>
             <ul>
-              <li>Sunday, 11:00am.</li>
-              <li>Partly cloudy</li>
+              <li id="dateandtime">Sunday, 11:00am.</li>
+              <li id="description">Partly cloudy</li>
             </ul>
           </div>
           <div class="row">
@@ -31,14 +32,15 @@
                   alt="Partly loudy"
                   class="float-left"
                 />
-                <span class="float-left degrees">17 </span>
+                <span class="float-left degrees" id="degree">17 </span>
                 <small> <a href="#"> °C | °F </a> </small>
               </div>
             </div>
             <div class="col-6">
-              Percipitation: 0% <br />
-              Humidity:54% <br />
-              Wind:14km/h <br />
+              Humidity: <span id="humid">54 </span> %
+              <br />
+              Wind:<span id="air">14 </span> km/h
+              <br />
             </div>
           </div>
         </div>
@@ -52,5 +54,6 @@
         </span>
       </div>
     </div>
+    <script src="src/index.js"></script>
   </body>
 </html>
