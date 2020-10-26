@@ -1,11 +1,11 @@
-let apiUrl ="https://api.openweathermap.org/data/2.5/weather?q=New York&appid=32669c9d2438b0a7d99b979086328197&units=metric";
+let apiUrl =`https://api.openweathermap.org/data/2.5/weather?q=New York&appid=32669c9d2438b0a7d99b979086328197&units=metric`;
 let degreeElement=document.querySelector("#degree");
 let humidElement=document.querySelector("#humid");
 let airElement=document.querySelector("#air");
 let descriptionElement=document.querySelector("#description");
 let dateTime=document.querySelector("#dateandtime");
-
-
+let imgElement= document.querySelector("#imgIcon");
+let cityElement=document.querySelector("#city");
 function weekDays(timestamp){
     let date=new Date(timestamp);
     let day = ["Sunday", "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -19,6 +19,7 @@ function weekDays(timestamp){
         minutes = `0${minutes}`;
     }
     return `${days},${hours}:${minutes}`;
+    
 }
 
 
@@ -30,5 +31,13 @@ humidElement.innerHTML= Math.round(response.data.main.humidity);
 airElement.innerHTML= Math.round(response.data.wind.speed);
 descriptionElement.innerHTML=(response.data.weather[0].description);
 dateTime.innerHTML= weekDays(response.data.dt*1000);
+let imgpath = (response.data.weather[0].icon);
+let altpath= (response.data.weather[0].description);
+// console.log(imgpath);
+imgElement.setAttribute("src",`http://openweathermap.org/img/wn/${imgpath}@2x.png`);
+imgElement.setAttribute("alt",`http://openweathermap.org/img/wn/${altpath}@2x.png`);
+
 }
+
+
 axios.get(apiUrl).then(temperature);
