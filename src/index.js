@@ -1,11 +1,8 @@
-
 function cityApiSearch(city){
       let apiUrl =`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=32669c9d2438b0a7d99b979086328197&units=metric`;
       axios.get(apiUrl).then(temperature);
-
 }
  
-
 let form = document.querySelector("#form-input");
 form.addEventListener("submit",citySearch);
 cityApiSearch("New york");
@@ -22,6 +19,11 @@ let airElement=document.querySelector("#air");
 let descriptionElement=document.querySelector("#description");
 let dateTime=document.querySelector("#dateandtime");
 let imgElement= document.querySelector("#imgIcon");
+let fahrenheitElement = document.querySelector("#fahrenheitlink")
+fahrenheitElement.addEventListener("click", displayFahrenheit)
+let celsiusElement = document.querySelector("#celsiuslink")
+celsiusElement.addEventListener("click", displayCelsius)
+
 
 function weekDays(timestamp){
     let date=new Date(timestamp);
@@ -36,10 +38,11 @@ function weekDays(timestamp){
         minutes = `0${minutes}`;
     }
     return `${days},${hours}:${minutes}`;
-    
-}
+  }
+
 function temperature (response){
 // console.log(response.data.main.temp);
+overallTemperature = (response.data.main.temp);
 let cityElement=document.querySelector("#city");
 cityElement.innerHTML= (response.data.name);
 degreeElement.innerHTML= Math.round(response.data.main.temp);
@@ -53,3 +56,26 @@ let altpath= (response.data.weather[0].description);
 imgElement.setAttribute("src",`http://openweathermap.org/img/wn/${imgpath}@2x.png`);
 imgElement.setAttribute("alt",`http://openweathermap.org/img/wn/${altpath}@2x.png`);
 }
+
+function displayFahrenheit(event){
+    event.preventDefault();  
+    
+    let farenhiteTemperature = ((overallTemperature*9)/5+32);
+    let degreeElement = document.querySelector("#degree");
+    degreeElement.innerHTML = Math.round(farenhiteTemperature);
+    celsiuslink.classlist.remove("active");
+    fahrenheitlink.classlist.add("active");
+
+
+}
+
+function displayCelsius(event){
+    event.preventDefault();
+    let degreeElement = document.querySelector("#degree");
+    degreeElement.innerHTML = Math.round(overallTemperature);
+    celsiuslink.classlist.add("active");
+    fahrenheitlink.classlist.remove("active");
+}
+let overallTemperature = null; 
+
+

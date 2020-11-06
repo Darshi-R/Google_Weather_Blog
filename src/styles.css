@@ -48,3 +48,10 @@ li {
   max-width: 600px;
   margin: 16px auto;
 }
+.weather-temperature .active {
+  color: #212529;
+  cursor: default;
+}
+.weather-temperature .active :hover {
+  text-decoration: none;
+}
