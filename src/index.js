@@ -63,8 +63,8 @@ function displayFahrenheit(event){
     let farenhiteTemperature = ((overallTemperature*9)/5+32);
     let degreeElement = document.querySelector("#degree");
     degreeElement.innerHTML = Math.round(farenhiteTemperature);
-    celsiuslink.classlist.remove("active");
-    fahrenheitlink.classlist.add("active");
+    celsiuslink.classList.remove("active");
+    fahrenheitlink.classList.add("active");
 
 
 }
@@ -73,8 +73,8 @@ function displayCelsius(event){
     event.preventDefault();
     let degreeElement = document.querySelector("#degree");
     degreeElement.innerHTML = Math.round(overallTemperature);
-    celsiuslink.classlist.add("active");
-    fahrenheitlink.classlist.remove("active");
+    celsiuslink.classList.add("active");
+    fahrenheitlink.classList.remove("active");
 }
 let overallTemperature = null; 
 

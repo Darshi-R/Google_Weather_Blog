@@ -55,3 +55,6 @@ li {
 .weather-temperature .active :hover {
   text-decoration: none;
 }
+.weekday-weather {
+  color: #bcbcbc;
+}
