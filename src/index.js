@@ -1,8 +1,31 @@
 function cityApiSearch(city){
-      let apiUrl =`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=32669c9d2438b0a7d99b979086328197&units=metric`;
+    let apiKey = "32669c9d2438b0a7d99b979086328197";
+      let apiUrl =`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
       axios.get(apiUrl).then(temperature);
+      apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+      axios.get(apiUrl).then(forecast);
 }
- 
+ function forecast(response){
+     let forecastDisplay=null;
+     let forecastElement = document.querySelector("#displayforecast");
+        forecastElement.innerHTML = null;
+
+    console.log(response.data.list[0]);
+     for (let i = 0; i < 6; i++) {
+         forecastDisplay= (response.data.list[i]);
+             forecastElement.innerHTML += `<div class="col-2" >
+              <div>
+                <h7>${dailyForecast(forecastDisplay.dt*1000)}</h7> </br>
+                <img src="http://openweathermap.org/img/wn/${forecastDisplay.weather[0].icon}@2x.png" alt=""/></br>
+                <div>
+                <strong> ${Math.round(forecastDisplay.main.temp_max)}°| ${Math.round(forecastDisplay.main.temp_min)}°</strong>
+              </div>
+              </div>
+            </div>`;
+    
+         
+     }
+ }
 let form = document.querySelector("#form-input");
 form.addEventListener("submit",citySearch);
 cityApiSearch("New york");
@@ -29,7 +52,13 @@ function weekDays(timestamp){
     let date=new Date(timestamp);
     let day = ["Sunday", "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     let days= day[date.getDay()];
-    let hours=date.getHours();
+    
+    return `${days},${dailyForecast(timestamp)}`;
+  }
+
+function dailyForecast(timestamp){
+  let date=new Date(timestamp);
+       let hours=date.getHours();
     if (hours<10){
         hours = `0${hours}`;
     }
@@ -37,8 +66,13 @@ function weekDays(timestamp){
         if (minutes<10){
         minutes = `0${minutes}`;
     }
-    return `${days},${hours}:${minutes}`;
+    return `${hours}:${minutes}`;
   }
+
+
+
+
+
 
 function temperature (response){
 // console.log(response.data.main.temp);
@@ -65,8 +99,6 @@ function displayFahrenheit(event){
     degreeElement.innerHTML = Math.round(farenhiteTemperature);
     celsiuslink.classList.remove("active");
     fahrenheitlink.classList.add("active");
-
-
 }
 
 function displayCelsius(event){
